@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Screen Recording</title>
+
+        <!-- css link -->
+        <link rel="stylesheet" href="css/style.css">
+
+        <!-- toast links -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.css" integrity="sha512-wJgJNTBBkLit7ymC6vvzM1EcSWeM9mmOu+1USHaRBbHkm6W9EgM0HY27+UtUaprntaYQJF75rc8gjxllKs5OIQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-toast-plugin/1.3.2/jquery.toast.min.js" integrity="sha512-zlWWyZq71UMApAjih4WkaRpikgY9Bz1oXIW5G0fED4vk14JjGlQ1UmkGM392jEULP8jbNMiwLWdM8Z87Hu88Fw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    </head>
+    
+    <body>
+
+        <h1>SCREEN RECORDER</h1>
+        <h4>Record screen with or without audio</h4>
+
+        <div class="allbtns">
+
+            <span style="margin-right: 10px;">Audio</span> 
+            <label class="toggle">
+                <input type="checkbox" id="audiorecord" onchange="audioToggle()">
+                <span class="slider round"></span>
+            </label>   
+
+            <button id="startBtn" class="btn1" onclick="startRecording()"><span>Start Recording ▷</span></button>
+            <button id="stopBtn" class="btn2" onclick="stopRecording()"><span>Stop Recording  ||</span></button>
+            <button id="downloadBtn" class="btn5" onclick="downloadRecording()"><span>Download Recording ↓</span></button>
+
+        </div>
+
+        <!-- js link -->
+        <script src="js/script.js"></script>
+
+    </body>
+</html>
