@@ -1,11 +1,28 @@
 let stream, audioStream;
 let mediaRecorder;
 let recordedVideo = []; //stores recordings
-let audioRecord = document.getElementById('audiorecord');
 
-//for audio toggle action
-const audioToggle = () => {
-    $.toast({text: audioRecord.checked ? 'Audio enabled...' : 'Audio disabled...',hideAfter: 1000, position: 'top-right', loaderBg: '#723be9'});
+let systemAudioRecord = document.getElementById('systemaudiorecord');
+let micAudioRecord = document.getElementById('micaudiorecord');
+
+//for system audio toggle action
+const systemAudioToggle = () => {
+    $.toast({text: systemAudioRecord.checked ? 'System audio enabled...' : 'System audio disabled...',hideAfter: 1000, position: 'top-right', loaderBg: '#723be9'});
+
+    if(micAudioRecord.checked){
+        micAudioRecord.checked = false;
+        $.toast({text: 'Only one audio at once!',hideAfter: 2000, position: 'top-right', loaderBg: 'red'});
+    }
+}
+
+//for microphone audio toggle action
+const micAudioToggle = () => {
+    $.toast({text: micAudioRecord.checked ? 'Microphone enabled...' : 'Microphone disabled...',hideAfter: 1000, position: 'top-right', loaderBg: '#723be9'});
+
+    if(systemAudioRecord.checked){
+        systemAudioRecord.checked = false;
+        $.toast({text: 'Only one audio at once!',hideAfter: 2000, position: 'top-right', loaderBg: 'red'});
+    }
 }
 
 // actives screensharing and starts recording
@@ -22,15 +39,15 @@ const startRecording = async () => {
                 frameRate: { ideal: 60 },
                 videoBitsPerSecond: 80000000
             },
-            audio: audioRecord.checked ? true : false,
+            audio: systemAudioRecord.checked ? true : false,
         });
 
         // for check if any audioinput device connected
         const devices = await navigator.mediaDevices.enumerateDevices();
         const audioInputDevices = devices.filter(device => device.kind === 'audioinput');
         
-        // for microphone audio if you don't check system audio
-        if(audioRecord.checked){
+        // for microphone audio validation
+        if(micAudioRecord.checked){
             if(audioInputDevices != ''){
 
                 audioStream = await navigator.mediaDevices.getUserMedia({
@@ -39,13 +56,17 @@ const startRecording = async () => {
     
                 stream.addTrack(audioStream.getAudioTracks()[0]);
             }
+            else{
+                $.toast({text: 'Microphone not found!',hideAfter: 1000, position: 'top-right', loaderBg: 'red'});
+                micAudioRecord.checked = false;
+            }
         }
 
         mediaRecorder = new MediaRecorder(stream);
         mediaRecorder.ondataavailable = handleDataAvailable;
         mediaRecorder.start();
 
-        $.toast({text: 'Recording started...',hideAfter: 1000, position: 'top-right', loaderBg: '#723be9'});
+        $.toast({text: 'Recording started...',hideAfter: 2000, position: 'top-right', loaderBg: '#723be9'});
 
     } 
     catch (error) {
