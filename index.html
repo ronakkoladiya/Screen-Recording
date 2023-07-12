@@ -23,11 +23,17 @@
 
         <div class="allbtns">
 
-            <span style="margin-right: 10px;">Audio</span> 
+            <span style="margin-right: 10px;">System Audio</span> 
             <label class="toggle">
-                <input type="checkbox" id="audiorecord" onchange="audioToggle()">
+                <input type="checkbox" id="systemaudiorecord" onchange="systemAudioToggle()">
                 <span class="slider round"></span>
-            </label>   
+            </label> 
+            
+            <span style="margin-right: 10px;">Microphone</span> 
+            <label class="toggle">
+                <input type="checkbox" id="micaudiorecord" onchange="micAudioToggle()">
+                <span class="slider round"></span>
+            </label> 
 
             <button id="startBtn" class="btn1" onclick="startRecording()"><span>Start Recording ▷</span></button>
             <button id="stopBtn" class="btn2" onclick="stopRecording()"><span>Stop Recording  ||</span></button>
